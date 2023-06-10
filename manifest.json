@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name": "Flash-Bold speed reader",
+    "version": "1.0",
+    "description": "Speed read with bolded first syllables and words flashing in place!",
+    "author": "Kensuke Shimojo",
+    "permissions": [
+      "activeTab"
+    ],
+    "icons": {
+      "16": "icons/icon16.jpg",
+      "48": "icons/icon48.jpg",
+      "128": "icons/icon128.jpg"
+    },
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": true
+    },
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_title": "Flash-Bold speed reader"
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://*/*"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+      }
+    ]
+    
+  }
+  

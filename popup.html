@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link id="styleSheet" rel="stylesheet" type="text/css" href="style1.css">
+  <link id="darkModeStyleSheet" rel="stylesheet" type="text/css" href="darkmode.css" >
+
+  <style>
+    /* Additional styling */
+    .flex-container {
+      display: flex;
+      align-items: center;
+    }
+    .label {
+      margin-right: 10px;
+    }
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+    body {
+     
+      margin-bottom: 1000px; /* Adjust the margin to your desired value */
+    }
+  </style>
+</head>
+<body>
+  <h3>Copy and Paste Text Here:</h3>
+  <textarea id="inputText" placeholder="Enter text"></textarea>
+  <br>
+  <div class="flex-container">
+    <label class="label">Dark Mode:</label>
+    <input type="checkbox" id="darkModeCheckbox" checked>
+  </div>
+  <br>
+  <div class="flex-container">
+    <label class="label">Pause Time (msec) Between Words:</label>
+    <input type="number" id="regularPauseTime" value="150" step="50">
+  </div>
+  <br>
+  <div class="flex-container">
+    <label class="label">Pause Time (msec) For Periods, Commas, etc:</label>
+    <input type="number" id="pauseTime" value="400" step="50">
+  </div>
+  <br>
+  <div class="flex-container">
+    <label class="label">Output Font Size (px):</label>
+    <input type="number" id="outputFontSize" value="50" step="25">
+  </div>
+  <br>
+  <div class="button-container">
+    <button id="playButton">Play</button>
+    <button id="pauseButton">Pause</button>
+    <button id="resumeButton">Resume</button>
+  </div>
+  <div id="output"></div>
+  <div id="cumulativeOutput"></div>
+
+  <script src="content.js"></script>
+</body>
+</html>
