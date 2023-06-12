@@ -4,13 +4,18 @@
     "version": "1.0",
     "description": "Speed read with bolded first syllables and words flashing in place!",
     "author": "Kensuke Shimojo",
-    "permissions": [
-      "activeTab"
-    ],
 
+    "permissions": [
+      "activeTab",
+      "storage"
+    ],
+    "web_accessible_resources": [
+      "index.html",
+      "content.js"
+    ],
     "background": {
       "scripts": ["background.js"],
-      "persistent": true
+      "persistent": false
     },
     "browser_action": {
       "default_popup": "popup.html",

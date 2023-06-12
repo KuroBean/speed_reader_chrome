@@ -7,6 +7,25 @@ var pauseKeys = [".", ",", ";", ":"];
 var pauseTimeForKeys = 300;
 var regularPauseTime = 150;
 var timeInterval;
+document.addEventListener('DOMContentLoaded', function() {
+  // Your code to set the inputText value here
+// Retrieve stored text from extension's storage
+chrome.storage.local.get(['highlightedText'], function(result) {
+  console.log("getting stored text");
+  var inputText = document.getElementById('inputText');
+  inputText.value = result.highlightedText || '';
+});
+});
+
+
+function handleSelection() { 
+  var selectedText = window.getSelection().toString(); 
+  if (selectedText.length > 0) {
+    console.log("Selected text:", selectedText); 
+    chrome.runtime.sendMessage({ text: selectedText }); 
+    console.log("msg sent");
+  } 
+}
 
 function displayWordsWithBoldSyllables() {
   var inputText = document.getElementById("inputText").value;
@@ -117,3 +136,4 @@ var regularPauseTimeInput = document.getElementById("regularPauseTime");
 regularPauseTimeInput.addEventListener("input", function () {
   regularPauseTime = parseInt(regularPauseTimeInput.value) || 150;
 });
+document.addEventListener("mouseup", handleSelection); 
