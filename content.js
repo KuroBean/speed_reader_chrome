@@ -7,6 +7,8 @@ var pauseKeys = [".", ",", ";", ":"];
 var pauseTimeForKeys = 300;
 var regularPauseTime = 150;
 var timeInterval;
+
+//PUT DOCUMENT EVENT LISTENERS HERE, NOT AT BOTTOM
 document.addEventListener('DOMContentLoaded', function() {
   // Your code to set the inputText value here
 // Retrieve stored text from extension's storage
@@ -16,9 +18,12 @@ chrome.storage.local.get(['highlightedText'], function(result) {
   inputText.value = result.highlightedText || '';
 });
 });
+document.addEventListener("mouseup", handleSelection); 
 
+document.addEventListener("click",function(){console.log("beans")});
 
 function handleSelection() { 
+  console.log("highlighting detected")
   var selectedText = window.getSelection().toString(); 
   if (selectedText.length > 0) {
     console.log("Selected text:", selectedText); 
@@ -115,6 +120,7 @@ function toggleDarkMode() {
   }
 }
 
+//BC OF NULL ERROR, ANYTHING BELOW HERE IS DEADZONE UNTIL POPUP IS OPENED
 var playButton = document.getElementById("playButton");
 playButton.addEventListener("click", displayWordsWithBoldSyllables);
 
@@ -136,4 +142,4 @@ var regularPauseTimeInput = document.getElementById("regularPauseTime");
 regularPauseTimeInput.addEventListener("input", function () {
   regularPauseTime = parseInt(regularPauseTimeInput.value) || 150;
 });
-document.addEventListener("mouseup", handleSelection); 
+
