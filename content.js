@@ -20,7 +20,7 @@ chrome.storage.local.get(['highlightedText'], function(result) {
 });
 document.addEventListener("mouseup", handleSelection); 
 
-document.addEventListener("click",function(){console.log("beans")});
+//document.addEventListener("click",function(){console.log("beans")});
 
 function handleSelection() { 
   console.log("highlighting detected")
@@ -68,6 +68,8 @@ function displayNextWord() {
   // Apply the font size to the output div
   outputDiv.style.fontSize = outputFontSize + "px";
   
+  cumulativeOutputDiv.style.fontSize=18+"px";
+
   outputDiv.innerHTML = formattedWord;
   cumulativeText += formattedWord + " ";
   cumulativeOutputDiv.innerHTML = cumulativeText;
