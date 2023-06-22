@@ -1,12 +1,7 @@
 let button = null; // Variable to hold the reference to the button
 //PUT DOCUMENT EVENT LISTENERS HERE, NOT AT BOTTOM
-var prevHighlightedText;
-// Your code to set the inputText value here
-// Retrieve stored text from extension's storage
-chrome.storage.local.get(['highlightedText'], function (result) {
-    console.log("getting stored text");
-    prevHighlightedText = result.highlightedText || '';
-});
+var prevHighlightedText="default";
+
 
 // Add an event listener for text selection
 document.addEventListener("mouseup", handleHighlight);
@@ -14,19 +9,14 @@ document.addEventListener("mouseup", handleHighlight);
 // Function to handle text selection
 function handleHighlight() {
     const selectedText = window.getSelection().toString().trim();
-
-    // Check if any text is selected
-    chrome.storage.local.get(['highlightedText'], function (result) {
-        console.log("getting stored text");
-        prevHighlightedText = result.highlightedText || '';
-    });
+    
     console.log(prevHighlightedText.valueOf() != selectedText.valueOf());
-    if (prevHighlightedText.valueOf() != selectedText.valueOf()) {
+    if (prevHighlightedText.valueOf() != selectedText.valueOf()) {//if new thing highlighted
         if (button) {
             button.remove(); // Remove the previously created button
         }
 
-        if (selectedText !== "") {
+        if (selectedText !== "") {//make button
             console.log("highlight detected");
             console.log("Selected text:", selectedText);
             console.log("prev text:", prevHighlightedText);
@@ -41,6 +31,7 @@ function handleHighlight() {
 
         }
     }
+    prevHighlightedText=selectedText;
     chrome.runtime.sendMessage({ text: selectedText });
     console.log("msg sent");
 }
