@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     inputText.value = result.highlightedText || '';
   });
 });
-document.addEventListener("mouseup", handleSelection);
+//document.addEventListener("mouseup", handleSelection);
 
 //document.addEventListener("click",function(){console.log("beans")});
 

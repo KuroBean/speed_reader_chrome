@@ -1,47 +1,71 @@
 let button = null; // Variable to hold the reference to the button
+//PUT DOCUMENT EVENT LISTENERS HERE, NOT AT BOTTOM
+var prevHighlightedText;
+// Your code to set the inputText value here
+// Retrieve stored text from extension's storage
+chrome.storage.local.get(['highlightedText'], function (result) {
+    console.log("getting stored text");
+    prevHighlightedText = result.highlightedText || '';
+});
 
 // Add an event listener for text selection
 document.addEventListener("mouseup", handleHighlight);
 
 // Function to handle text selection
 function handleHighlight() {
-  const selectedText = window.getSelection().toString().trim();
+    const selectedText = window.getSelection().toString().trim();
 
-  // Check if any text is selected
-  if (selectedText !== "") {
-    if (button) {
-      button.remove(); // Remove the previously created button
+    // Check if any text is selected
+    chrome.storage.local.get(['highlightedText'], function (result) {
+        console.log("getting stored text");
+        prevHighlightedText = result.highlightedText || '';
+    });
+    console.log(prevHighlightedText.valueOf() != selectedText.valueOf());
+    if (prevHighlightedText.valueOf() != selectedText.valueOf()) {
+        if (button) {
+            button.remove(); // Remove the previously created button
+        }
+
+        if (selectedText !== "") {
+            console.log("highlight detected");
+            console.log("Selected text:", selectedText);
+            console.log("prev text:", prevHighlightedText);
+            
+            setTimeout(() => {
+                button = createButton();
+                positionButton(button);
+                button.addEventListener("click", handlePopup);
+                console.log("button eventlistener added");
+                document.body.appendChild(button);
+            }, 200);
+
+        }
     }
-    button = createButton();
-    positionButton(button);
-    button.addEventListener("click", handlePopup());
-    document.body.appendChild(button);
-  }
+    chrome.runtime.sendMessage({ text: selectedText });
+    console.log("msg sent");
 }
 
 // Function to create the "Show Popup" button
 function createButton() {
-  const button = document.createElement("button");
-  button.textContent = "Show Popup";
-  return button;
+    const button = document.createElement("button");
+    button.textContent = "Show Popup";
+    return button;
 }
 
-// Function to position the button next to the highlighted text
 function positionButton(button) {
-  const selection = window.getSelection();
-  const range = selection.getRangeAt(0);
-  const rect = range.getBoundingClientRect();
-  button.style.position = "absolute";
-  button.style.left = rect.right + "px";
-  button.style.top = rect.top + window.pageYOffset + "px";
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        button.style.position = "absolute";
+        button.style.left = rect.right + "px";
+        button.style.top = rect.top + window.pageYOffset + "px";
+    }
 }
-
 // Create a function to handle the popup
 function handlePopup() {
     console.log('handlePopup() has been run.');
 
-    // Remove the button
-    //removeButton();
 
     // Open a new window
     const popupWindow = window.open('', '', 'width=500,height=500');
