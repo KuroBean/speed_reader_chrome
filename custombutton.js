@@ -41,12 +41,12 @@ function createButton() {
   button.style.width = "40px";
   button.style.height = "40px";
   button.style.borderRadius = "50%";
-  button.style.backgroundColor = "transparent";
+  button.style.backgroundColor = "blue";
   button.style.backgroundImage = "url(icons/logo.jpg)";
-
   button.style.backgroundSize = "cover";
   button.style.backgroundPosition = "center";
   button.style.backgroundRepeat = "no-repeat";
+
   return button;
 }
 

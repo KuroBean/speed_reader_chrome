@@ -11,7 +11,8 @@
     ],
     "web_accessible_resources": [
       "index.html",
-      "content.js"
+      "content.js",
+      "icons/logo.jpg"
     ],
     "background": {
       "scripts": ["background.js"],
