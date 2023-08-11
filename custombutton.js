@@ -42,11 +42,15 @@ function createButton() {
   button.style.height = "40px";
   button.style.borderRadius = "50%";
   button.style.backgroundColor = "blue";
-  button.style.backgroundImage = "url(icons/logo.jpg)";
+  
+  // Get the extension URL and append the relative path to the image
+  const imageUrl = chrome.extension.getURL("icons/logo.jpg");
+  button.style.backgroundImage = `url(${imageUrl})`;
+
   button.style.backgroundSize = "cover";
   button.style.backgroundPosition = "center";
   button.style.backgroundRepeat = "no-repeat";
-
+  
   return button;
 }
 

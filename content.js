@@ -4,7 +4,7 @@ var index = 0;
 var cumulativeText = "";
 var timeoutId;
 var pauseKeys = [".", ",", ";", ":", ")", "]"];
-var pauseTimeForKeys = 300;
+var pauseTimeForKeys = 200;
 var regularPauseTime = 150;
 var timeInterval;
 var timeIncPerChar = 20; // Adjust this value to control the time increment per character
